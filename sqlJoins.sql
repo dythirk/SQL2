@@ -19,11 +19,17 @@ select categories.name as 'Category Name', departments.name as 'Department Name'
 /* joins: find the product name, total # sold, and total price sold,
 
  for Eagles: Hotel California --You may need to use SUM() */
-
+ 
+ select products.name, sales.quantity, products.price, sum(sales.quantity) from products inner join sales on products.productid = sales.productid where products.name like '%hotel%' group by products.productid;
+ 
 /* joins: find Product name, reviewer name, rating, and comment on the Visio TV. (only return for the lowest rating!) */
+
+select products.name, reviews.reviewer, reviews.rating, reviews.comment from products inner join reviews on products.productid = reviews.productid where products.name = 'Visio TV';
 
 -- ------------------------------------------ Extra - May be difficult
 
 /* Your goal is to write a query that serves as an employee sales report.
 
 This query should return the employeeID, the employee's first and last name, the name of each product, how many of that product they sold */
+
+select employees.employeeid, employees.firstname, employees.lastname, products.name, sales.quantity from employees inner join sales on employees.employeeid = sales.employeeid inner join products on sales.productid = products.productid order by employees.employeeid;
